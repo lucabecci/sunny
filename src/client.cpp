@@ -40,6 +40,6 @@ int main(int argc, char *argv[], char **envp)
   std::cout << "Hello message sent" << std::endl;
   //Leyendo valor buffer recibido automaticamente por el servere
   valread = read(sock, buffer, 1024);
-  std::cout << "%s\n" << buffer << std::endl;
+  std::cout << buffer << std::endl;
   return 0;
 }
