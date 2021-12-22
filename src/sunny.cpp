@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
-#include "./network/sides.h"
+#include "./interface/cli.h"
 
 int main(int argc, char const *argv[])
 {
-  sides s;
-  s.process();
+  cli c;
+  c.run();
   return 0;
 }
