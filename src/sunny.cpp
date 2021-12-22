@@ -3,7 +3,7 @@
 
 int main(int argc, char const *argv[])
 {
-  Server s;
+  server s;
   s.connect();
   return 0;
 }
