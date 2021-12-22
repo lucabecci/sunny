@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
-#include "./server/server.h"
+#include "./network/sides.h"
 
 int main(int argc, char const *argv[])
 {
-  server s;
-  s.connect();
+  sides s;
+  s.process();
   return 0;
 }

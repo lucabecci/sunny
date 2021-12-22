@@ -1,16 +1,29 @@
+#ifndef SERVER_H
+#define SERVER_H
+
 #include <bits/stdc++.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include<unistd.h>
+#include <unistd.h>
 #include <netdb.h>
 #include <cstring>
-#include "./server.h"
+
 #define PORT 8080
 #define MAX 80
 #define SA struct sockaddr
 
-void server::connect(void)
+class server
+{
+  private:
+    char buff[MAX];
+    int n;
+    void process(int connfd);
+  public:
+    int connection(void);
+};
+
+int server::connection(void)
 {
   //Declaracion de variables
   int sockfd, connfd, len;
@@ -57,6 +70,7 @@ void server::connect(void)
     else std::cout << "Server accept the client" << std::endl;
     process(connfd);
     close(sockfd);
+    return 0;
   }
 }
 
@@ -84,3 +98,6 @@ void server::process(int connfd)
     }
   }
 }
+
+
+#endif
