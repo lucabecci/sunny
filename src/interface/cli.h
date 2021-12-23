@@ -1,5 +1,7 @@
+#include <algorithm>
 #include <bits/stdc++.h>
 #include <cstring>
+#include <algorithm>
 #include "./colors.h"
 
 extern bool logs;
@@ -7,7 +9,7 @@ extern bool logs;
 class cli
 {
     private:
-        void sun(void);
+        std::string lowercase(std::string str);
         void name(void);
         colors c;
     public:
@@ -19,9 +21,17 @@ cli::cli(void)
     name();
 }
 
+std::string cli::lowercase(std::string str)
+{
+    std::for_each(str.begin(), str.end(), [](char & c)
+    {
+        c = ::tolower(c);
+    });
+    return str;
+}
+
 void cli::name(void)
 {
-    std::cout << logs << std::endl;
     std::cout << " ░██████╗██╗░░░██╗███╗░░██╗███╗░░██╗██╗░░░██╗" << std::endl;
     std::cout << " ██╔════╝██║░░░██║████╗░██║████╗░██║╚██╗░██╔╝" << std::endl;
     std::cout << " ╚█████╗░██║░░░██║██╔██╗██║██╔██╗██║░╚████╔╝░" << std::endl;
@@ -40,6 +50,8 @@ void cli::run(void)
         std::cout << c.change(0) << "Sunny => ";
         while (std::cin.get(ch) && ch != '\n')
             str += ch;
+
+        str = lowercase(str);
         if(str == "exit")
         {
             break;
