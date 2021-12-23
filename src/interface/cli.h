@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 #include <cstring>
 #include "./colors.h"
+
+extern bool logs;
+
 class cli
 {
     private:
@@ -18,6 +21,7 @@ cli::cli(void)
 
 void cli::name(void)
 {
+    std::cout << logs << std::endl;
     std::cout << " ░██████╗██╗░░░██╗███╗░░██╗███╗░░██╗██╗░░░██╗" << std::endl;
     std::cout << " ██╔════╝██║░░░██║████╗░██║████╗░██║╚██╗░██╔╝" << std::endl;
     std::cout << " ╚█████╗░██║░░░██║██╔██╗██║██╔██╗██║░╚████╔╝░" << std::endl;
@@ -45,3 +49,5 @@ void cli::run(void)
     std::cout << "CLI FINISHED" << std::endl;
     return;
 }
+
+
