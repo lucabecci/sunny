@@ -7,7 +7,6 @@ enum CASES {
 class desition
 {
     private:
-        void configuration(void);
         void help(void);
     public:
         void cmd(std::string command);
@@ -16,13 +15,19 @@ class desition
 
 void desition::cmd(std::string command)
 {
-    switch(command)
-    {
-        case "conf":
-            configuration(void);
-        case "help":
-            help(void);
+    if(command == "help"){
+        help();
+    }else{
+        std::cout << "Invalid command" << std::endl;
     }
+    return;
 }
 
 
+void desition::help(void)
+{
+    std::cout << "- memory" << std::endl;
+    std::cout << "- dms" << std::endl;
+    std::cout << "- clear cache" << std::endl;
+    return;
+}

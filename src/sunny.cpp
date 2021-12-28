@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
-#include "./interface/cli.h"
+#include "./network/client.h"
 #include "./globals.h"
 int main(int argc, char const *argv[])
 {
-  cli c;
-  c.run();
+  client c;
+  c.connection();
   return 0;
 }

@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include "../interface/cli.h"
 
 #define MAX 80
 #define PORT 8080
@@ -13,8 +14,7 @@
 class client
 {
   private:
-    char buff[MAX];
-    int n;
+    cli c;
     void process(int sockfd);
   public:
     int connection(void);
@@ -54,16 +54,8 @@ void client::process(int sockfd)
 {
   for(;;)
   {
-    bzero(buff, sizeof(buff));
-    std::cout << "Enter str" << std::endl;
-    n = 0;
-    while((buff[n++] = getchar()) != '\n');
-
-    write(sockfd, buff, sizeof(buff));
-    bzero(buff, sizeof(buff));
-    read(sockfd, buff, sizeof(buff));
-    std::cout << "Received from server" << buff << std::endl;
-    if((strncmp(buff, "exit", 4)) == 0)
+    int end = c.run();
+    if(end)
     {
       std::cout << "Client exit..." << std::endl;
       break;

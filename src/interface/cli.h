@@ -2,8 +2,8 @@
 #include <bits/stdc++.h>
 #include <cstring>
 #include <algorithm>
-#include "./colors.h"
-
+#include "../utils/colors.h"
+#include "./desition.h"
 extern bool logs;
 
 class cli
@@ -12,9 +12,10 @@ class cli
         std::string lowercase(std::string str);
         void name(void);
         colors c;
+        desition d;
     public:
         cli(void);
-        void run(void);        
+        int run(void);        
 };
 cli::cli(void)
 {
@@ -41,25 +42,23 @@ void cli::name(void)
     return;
 }
 
-void cli::run(void)
+int cli::run(void)
 {
-    while(1)
-    {
-        char ch;
-        std::string str = "";
-        std::cout << c.change(0) << "Sunny => ";
-        while (std::cin.get(ch) && ch != '\n')
-            str += ch;
+    char ch;
+    std::string str = "";
+    std::cout << c.change(0) << "Sunny => ";
+    while (std::cin.get(ch) && ch != '\n')
+        str += ch;
 
-        str = lowercase(str);
-        if(str == "exit")
-        {
-            break;
-        }
-        else std::cout << "Word input: " << str << std::endl;
+    str = lowercase(str);
+    std::string parsed = str;
+    d.cmd(parsed);
+    if(str == "exit")
+    {
+        return 1;
     }
-    std::cout << "CLI FINISHED" << std::endl;
-    return;
+    else std::cout << "Word input: " << str << std::endl;
+    return 0;
 }
 
 
