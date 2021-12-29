@@ -8,6 +8,7 @@ class desition
 {
     private:
         void help(void);
+        void memory(std::string command);
     public:
         void cmd(std::string command);
 };
@@ -18,11 +19,15 @@ void desition::cmd(std::string command)
     if(command == "help"){
         help();
     }else{
-        std::cout << "Invalid command" << std::endl;
+        memory(command);
     }
     return;
 }
 
+void desition::memory(std::string command)
+{
+    
+}
 
 void desition::help(void)
 {

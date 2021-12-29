@@ -1,3 +1,5 @@
+#include <cstddef>
+
 template<typename K, typename V>
 
 class hashNode
@@ -18,3 +20,5 @@ class hashNode
 
     void setNext(hashNode *next) { hashNode::next = next; }
 };
+
+
