@@ -8,7 +8,7 @@ enum options
 };
 
 
-class memory
+class managment
 {
   private:
     void send(void);
@@ -18,7 +18,7 @@ class memory
     void execute(std::string command);
 };
 
-void memory::validate(std::string command)
+void managment::validate(std::string command)
 {
   switch(resolveOpt(command))
   {
@@ -31,7 +31,7 @@ void memory::validate(std::string command)
 }
 
 
-options memory::resolveOpt(std::string command)
+options managment::resolveOpt(std::string command)
 {
   if(command == "test") return invalid;
 }

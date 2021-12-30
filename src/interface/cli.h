@@ -3,7 +3,7 @@
 #include <cstring>
 #include <algorithm>
 #include "../utils/colors.h"
-#include "./desition.h"
+#include "./decisions.h"
 extern bool logs;
 
 class cli
@@ -12,7 +12,7 @@ class cli
         std::string lowercase(std::string str);
         void name(void);
         colors c;
-        desition d;
+        decisions d;
     public:
         cli(void);
         int run(void);        

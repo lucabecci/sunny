@@ -1,35 +1,31 @@
 #include <bits/stdc++.h>
 #include <cstring>
+#include "../memory/managment.h"
 
 enum CASES {
     HELP = 0,
 };
-class desition
+class decisions
 {
     private:
+        managment m;
         void help(void);
-        void memory(std::string command);
     public:
         void cmd(std::string command);
 };
 
 
-void desition::cmd(std::string command)
+void decisions::cmd(std::string command)
 {
     if(command == "help"){
         help();
     }else{
-        memory(command);
+        m.validate(command);
     }
     return;
 }
 
-void desition::memory(std::string command)
-{
-    
-}
-
-void desition::help(void)
+void decisions::help(void)
 {
     std::cout << "- memory" << std::endl;
     std::cout << "- dms" << std::endl;
