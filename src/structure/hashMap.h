@@ -1,27 +1,30 @@
 #pragma once
 
+#include<bits/stdc++.h>
 #include <memory>
 #include <unordered_map>
-
-template <typename K, typename V>
+#include<cstring>
 class hashMap
 {
-  private:
-    std::unordered_map<K, V> hmap;
   public:
-    hashMap(K key_type, V value_type)
+    std::unordered_map<std::string, std::string> hmap;
+    std::string get(std::string key)
     {
-      if(!key_type || !value_type)
-      {
-        std::cout << "Error" << std::endl;
-        return;
+      std::unordered_map<std::string, std::string>::iterator v;
+      v = hmap.find(key);
+      if(v != hmap.end()){
+        return v->second;
       }
-      hmap = std::unordered_map<key_type, value_type>;
+      return NULL;
     }
-    V get(K key)
+    void put(std::string key, std::string value)
     {
-      
-    }
-    void put(K key, V value);
-    void remove(K key);
+      hmap[key] = value;
+      return;
+    };
+    void remove(std::string key)
+    {
+      hmap.erase(key);
+      return;
+    };
 };
