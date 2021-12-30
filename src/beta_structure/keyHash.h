@@ -1,7 +1,7 @@
 //one exec in all compilation
 #pragma once 
 
-//template for key<random type> and size of the table
+//template for key<random type> size of the table
 template<typename K, size_t tableSize>
 
 struct keyHash
