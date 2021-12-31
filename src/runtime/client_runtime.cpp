@@ -1,9 +1,10 @@
 #include<bits/stdc++.h>
-#include "../network/client.h"
-
+#include "../network/singleton_client.h"
+#include "../globals.h"
 int main(int argc, char *argv[]){
-    client c;
-    std::cout << "Creating instance of the client side network" << std::endl;
-    c.connection();
+    singleton_client *c = singleton_client::instance();
+    std::cout << c->sockfd << std::endl;
+    c->connection();
+    std::cout << c->sockfd << std::endl;
     return 0;
 }

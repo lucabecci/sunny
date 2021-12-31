@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 #include "./network/client.h"
-#include "./globals.h"
 int main(int argc, char const *argv[])
 {
   client c;

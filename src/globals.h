@@ -1,3 +1,3 @@
 bool logs = false;
-int sockf = 0;
+int sockfd = 0;
 

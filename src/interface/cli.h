@@ -57,7 +57,6 @@ int cli::run(void)
     {
         return 1;
     }
-    else std::cout << "Word input: " << str << std::endl;
     return 0;
 }
 
