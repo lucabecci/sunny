@@ -16,9 +16,20 @@ class decisions
 
 void decisions::cmd(std::string command)
 {
-    if(command == "help"){
+    if(command == "help")
+    {
         help();
-    }else{
+    }
+    else if(command == "exit")
+    {
+        m.pst("exit");
+    }
+    else if(command == "disconnect")
+    {
+        m.pst("disconnect")
+    }
+    else
+    {
         m.validate(command);
     }
     return;

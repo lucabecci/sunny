@@ -18,7 +18,8 @@ class server
 {
   private:
     char buff[MAX];
-    void process(int connfd);
+    int n;
+    bool process(int connfd);
   public:
     int connection(void);
 };
@@ -39,14 +40,12 @@ int server::connection(void)
   else
   {
     std::cout << "Socket successfully connected..." << std::endl;
-    bzero(&servaddr, sizeof(servaddr)); //limpiando bits en memoria
+    bzero(&servaddr, sizeof(servaddr)); 
 
-    //declarando y asignando las variables de network
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(PORT);
-    
-    //Comprobacion para el bind del socket
+
     if((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0)
     {
       std::cout << "Socket bind failed" << std::endl;
@@ -54,7 +53,6 @@ int server::connection(void)
     }
     else std::cout << "Socket successfully binded" << std::endl;
 
-    //Comprobacion para saber si el socket esta escuchando en el puerto especificado
     if((listen(sockfd, 5)) != 0)
     {
       std::cout << "Server listen failed" << std::endl;
@@ -62,29 +60,51 @@ int server::connection(void)
     }
     else std::cout << "Server listen" << std::endl;
     
-    len = sizeof(cli);
-    connfd = accept(sockfd, (SA*)&cli, (socklen_t*)&len);
+    for(;;)
+    {
+      len = sizeof(cli);
+      connfd = accept(sockfd, (SA*)&cli, (socklen_t*)&len);
+      std::cout << connfd << std::endl;
+      if(connfd < 0) std::cout << "Server accept failed" << std::endl;
+      else std::cout << "Server accept the client" << std::endl;
+      bool exit = process(connfd);
+      if(exit){
+        break;
+      }
+      connfd = 0;
+    }
     
-    //Comprobacion para ver si el socket acepto la conexion del cliente TCP
-    if(connfd < 0) std::cout << "Server accept failed" << std::endl;
-    else std::cout << "Server accept the client" << std::endl;
-    process(connfd);
     close(sockfd);
     return 0;
   }
 }
 
-void server::process(int connfd)
+bool server::process(int connfd)
 {
-  //for infinito para recibir los buffer-msg del cliente TCP
+  bool exit = false;
   for(;;)
   {
     bzero(buff, MAX);
     read(connfd, buff, sizeof(buff));
-    //Stdout del buffer recibido
-    std::cout << "Message received from client: " << buff << std::endl;
-    bzero(buff, MAX);
+    std::string bstr = buff;
+    if(bstr.length() > 1)
+    {
+      std::cout << "Message received from client: " << buff << std::endl;
+      if(bstr == "disconnect"){
+        bzero(buff, MAX);
+        break;
+      }
+      if(bstr == "exit"){
+        bzero(buff, MAX);
+        exit = true;
+        break;
+      }
+      n = 0;
+    }else{
+      break;
+    }
   }
+  return exit;
 }
 
 

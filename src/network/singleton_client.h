@@ -43,8 +43,6 @@ void singleton_client::connection(void)
     std::cout << "Socket creation failed" << std::endl;
     exit(0);
   }
-  else 
-    std::cout << "Socket successfuly created" << std::endl;
   bzero(&servaddr, sizeof(servaddr));
 
   servaddr.sin_family = AF_INET;
@@ -56,6 +54,4 @@ void singleton_client::connection(void)
     std::cout << "Connection with the TCP server failed" << std::endl;
     exit(0);
   }
-  else
-    std::cout << "Connected to the TCP server" << std::endl;
 }

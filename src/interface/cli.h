@@ -52,7 +52,7 @@ int cli::run(void)
     str = lowercase(str);
     std::string parsed = str;
     d.cmd(parsed);
-    if(str == "exit")
+    if(str == "finish all")
     {
         return 1;
     }

@@ -6,31 +6,27 @@ extern int sockfd;
 class managment
 {
   private:
-    void send(void);
-    bool pst(std::string f);
     std::string first(std::string str);
   public:
+    bool pst(std::string f);
     void validate(std::string command);
-    void execute(std::string command);
 };
 void managment::validate(std::string command)
 {
-  std::cout << sockfd << std::endl;
   std::string initial = first(command);
   if(initial == "put")
   {
-    std::cout << "put command" << std::endl;
     pst(command);
   }
   else if(initial == "remove")
   {
-    std::cout << "remove command" << std::endl;
+    pst(command);
   }
   else if(initial == "get")
   {
-    std::cout << "get command" << std::endl;
+    pst(command);
   }
-  else std::cout << "invalid command" << std::endl;
+  else std::cout << "Invalid command" << std::endl;
   return;
 }
 
@@ -40,7 +36,6 @@ bool managment::pst(std::string f)
   for(std::string::size_type i = 0; i < f.size(); ++i) {
     buff[i] = f[i];
   }
-  std::cout << buff << std::endl;
   if(sockfd < 1)
   {
     std::cout << "Socket not created" << std::endl;
