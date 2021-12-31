@@ -26,7 +26,7 @@ void decisions::cmd(std::string command)
     }
     else if(command == "disconnect")
     {
-        m.pst("disconnect")
+        m.pst("disconnect");
     }
     else
     {
