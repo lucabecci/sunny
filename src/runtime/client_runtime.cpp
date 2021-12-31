@@ -5,5 +5,6 @@ int main(int argc, char *argv[]){
     std::cout << c->sockfd << std::endl;
     c->connection();
     std::cout << c->sockfd << std::endl;
+    c->pst("test");
     return 0;
 }
