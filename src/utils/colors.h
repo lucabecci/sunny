@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <cstring>
 
 #define BOLDRED     "\033[1m\033[31m"      /* Bold Red */

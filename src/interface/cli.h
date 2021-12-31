@@ -1,7 +1,6 @@
 #include <algorithm>
-#include <bits/stdc++.h>
 #include <cstring>
-#include <algorithm>
+#include <iostream>
 #include "../utils/colors.h"
 #include "./decisions.h"
 extern bool logs;

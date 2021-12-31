@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<iostream>
 #include "../network/server.h"
 
 int main(int argc, char *argv[]){

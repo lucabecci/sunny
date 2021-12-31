@@ -1,4 +1,3 @@
-#include<bits/stdc++.h>
 #include "../network/singleton_client.h"
 #include "../globals.h"
 int main(int argc, char *argv[]){

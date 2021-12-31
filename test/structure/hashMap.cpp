@@ -1,4 +1,3 @@
-#include<bits/stdc++.h>
 #include<cstring>
 
 #include "../../src/structure/hashMap.h"
