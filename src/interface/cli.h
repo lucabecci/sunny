@@ -7,6 +7,7 @@ extern bool logs;
 class cli
 {
     private:
+        int sock;
         std::string lowercase(std::string str);
         void name(void);
         colors c;
@@ -15,7 +16,7 @@ class cli
         cli(void);
         int run(void);        
 };
-cli::cli(void)
+cli::cli()
 {
     name();
 }

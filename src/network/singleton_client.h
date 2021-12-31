@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include "../interface/cli.h"
 
 #define MAX 80
 #define PORT 8080
@@ -14,12 +13,10 @@
 class singleton_client
 {
   private:    
-    cli c;
     singleton_client(){};
     singleton_client(singleton_client const&) {};
     singleton_client& operator=(singleton_client const&) {return *this;};
     static singleton_client * instance_;
-    void process(void);
   public:
     int sockfd;
     static singleton_client * instance();
@@ -33,23 +30,6 @@ singleton_client* singleton_client::instance()
 {
   if(!instance_) instance_ = new singleton_client();
   return instance_; 
-}
-
-bool singleton_client::pst(std::string f)
-{
-  char buff[f.length()];
-  for(std::string::size_type i = 0; i < f.size(); ++i) {
-    buff[i] = f[i];
-  }
-  std::cout << buff << std::endl;
-  if(sockfd < 1)
-  {
-    std::cout << "Socket not created" << std::endl;
-    return false;
-  }
-  write(sockfd, buff, sizeof(buff));
-  bzero(buff, sizeof(buff));
-  return true;
 }
 
 void singleton_client::connection(void)
@@ -78,18 +58,4 @@ void singleton_client::connection(void)
   }
   else
     std::cout << "Connected to the TCP server" << std::endl;
-  process();
-}
-
-void singleton_client::process(void)
-{
-  for(;;)
-  {
-    int end = c.run();
-    if(end)
-    {
-      std::cout << "Client exit..." << std::endl;
-      break;
-    }
-  }
 }

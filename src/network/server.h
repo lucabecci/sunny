@@ -18,7 +18,6 @@ class server
 {
   private:
     char buff[MAX];
-    int n;
     void process(int connfd);
   public:
     int connection(void);
@@ -85,18 +84,6 @@ void server::process(int connfd)
     //Stdout del buffer recibido
     std::cout << "Message received from client: " << buff << std::endl;
     bzero(buff, MAX);
-    n = 0;
-
-    while((buff[n++] = getchar()) != '\n')
-    {
-      write(connfd, buff, sizeof(buff));
-      //Si el buffer parseado es exit se finalizara el for inifinito, al finalizar el mismo se cerrara la conexcion del server TCP
-      if(strncmp("exit", buff, 4) == 0)
-      {
-        std::cout << "Server exit..." << std::endl;
-        break;
-      }
-    }
   }
 }
 

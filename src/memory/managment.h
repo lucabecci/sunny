@@ -1,51 +1,54 @@
 #include<cstring>
+#include <netinet/in.h>
+#include <unistd.h>
 
-enum options
-{
-  put,
-  del,
-  g,
-  notfound
-};
-
-
+extern int sockfd;
 class managment
 {
   private:
     void send(void);
+    bool pst(std::string f);
     std::string first(std::string str);
-    options resolveOpt(std::string command);
   public:
     void validate(std::string command);
     void execute(std::string command);
 };
-
 void managment::validate(std::string command)
 {
-
+  std::cout << sockfd << std::endl;
   std::string initial = first(command);
-  std::cout << initial.length() << std::endl;
-  switch(resolveOpt(initial))
+  if(initial == "put")
   {
-    case put:
-      std::cout << "put" << command << std::endl;
-    case del:
-      std::cout << "remove" << command << std::endl;
-    case g:
-      std::cout << "get" << command << std::endl;
-    case notfound:
-      std::cout << "Invalid command" << std::endl;
+    std::cout << "put command" << std::endl;
+    pst(command);
   }
+  else if(initial == "remove")
+  {
+    std::cout << "remove command" << std::endl;
+  }
+  else if(initial == "get")
+  {
+    std::cout << "get command" << std::endl;
+  }
+  else std::cout << "invalid command" << std::endl;
   return;
 }
 
-
-options managment::resolveOpt(std::string command)
+bool managment::pst(std::string f)
 {
-  if(command == "put") return put;
-  else if(command == "remove") return del;
-  else if(command == "get") return g;
-  else return notfound;
+  char buff[f.length()];
+  for(std::string::size_type i = 0; i < f.size(); ++i) {
+    buff[i] = f[i];
+  }
+  std::cout << buff << std::endl;
+  if(sockfd < 1)
+  {
+    std::cout << "Socket not created" << std::endl;
+    return false;
+  }
+  write(sockfd, buff, sizeof(buff));
+  bzero(buff, sizeof(buff));
+  return true;
 }
 
 std::string managment::first(std::string str)
