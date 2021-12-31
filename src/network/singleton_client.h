@@ -14,6 +14,7 @@
 class singleton_client
 {
   private:    
+    cli c;
     singleton_client(){};
     singleton_client(singleton_client const&) {};
     singleton_client& operator=(singleton_client const&) {return *this;};
@@ -77,9 +78,18 @@ void singleton_client::connection(void)
   }
   else
     std::cout << "Connected to the TCP server" << std::endl;
+  process();
 }
 
 void singleton_client::process(void)
 {
-
+  for(;;)
+  {
+    int end = c.run();
+    if(end)
+    {
+      std::cout << "Client exit..." << std::endl;
+      break;
+    }
+  }
 }
