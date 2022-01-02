@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <cstring>
-
+#include "../interface/server_decisions.h"
 #define PORT 8080
 #define MAX 80
 #define SA struct sockaddr
@@ -17,6 +17,7 @@
 class server
 {
   private:
+    server_decisions sd;
     char buff[MAX];
     int n;
     bool process(int connfd);
@@ -92,6 +93,7 @@ bool server::process(int connfd)
       std::cout << "Message received from client: " << buff << std::endl;
       if(bstr == "disconnect"){
         bzero(buff, MAX);
+        exit = true;
         break;
       }
       if(bstr == "exit"){
@@ -99,6 +101,7 @@ bool server::process(int connfd)
         exit = true;
         break;
       }
+      sd.analyze(bstr);
       n = 0;
     }else{
       break;
