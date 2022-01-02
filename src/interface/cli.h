@@ -51,8 +51,14 @@ int cli::run(void)
 
     str = lowercase(str);
     std::string parsed = str;
+    if(parsed == "clear")
+    {
+        system("clear");
+        name();
+        return 0;
+    }
     d.cmd(parsed);
-    if(str == "exit")
+    if(parsed == "exit")
     {
         return 1;
     }
