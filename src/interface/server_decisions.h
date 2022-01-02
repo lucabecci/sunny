@@ -39,7 +39,10 @@ void server_decisions::analyze(std::string command)
     else if(three_v[0] == "get")
     {
         std::string value = q.get(three_v[1]);
-        std::cout << value << std::endl;
+        if(value)
+        {
+            std::cout << value << std::endl;
+        }
     }
     else if(three_v[0] == "remove")
     {

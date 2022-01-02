@@ -16,9 +16,9 @@ class querys
       hmap.put(key, value);
       return;
     }
-    void remove(std::string key)
+    bool remove(std::string key)
     {
-      hmap.remove(key);
-      return;
+      bool deleted = hmap.remove(key);
+      return deleted;
     }
 };

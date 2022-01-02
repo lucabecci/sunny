@@ -21,9 +21,10 @@ class hashMap
       hmap[key] = value;
       return;
     };
-    void remove(std::string key)
+    bool remove(std::string key)
     {
+      if(hmap.find(key) == hmap.end()) return false;
       hmap.erase(key);
-      return;
+      return true;
     };
 };
