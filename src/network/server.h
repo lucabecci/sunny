@@ -10,8 +10,9 @@
 #include <netdb.h>
 #include <cstring>
 #include "../interface/server_decisions.h"
+
 #define PORT 8080
-#define MAX 80
+#define MAX 1024
 #define SA struct sockaddr
 
 class server
@@ -20,20 +21,18 @@ class server
     server_decisions sd;
     char buff[MAX];
     int n;
-    bool process(int connfd);
+    int internal_sockfd = 0;
   public:
-    int connection(void);
+    void connection(void);
+    bool process();
+    int connfd;
 };
 
-int server::connection(void)
+void server::connection(void)
 {
-  //Declaracion de variables
-  int sockfd, connfd, len;
-  struct sockaddr_in servaddr, cli;
-  //Se instancia el socket a usar
-  sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  //Comprobando si el socket fue creado
-  if(sockfd == -1)
+  struct sockaddr_in servaddr;
+  internal_sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  if(internal_sockfd == -1)
   {
     std::cout << "Socket creation failed..." << std::endl;
     exit(0);
@@ -47,68 +46,60 @@ int server::connection(void)
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(PORT);
 
-    if((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0)
+    if((bind(internal_sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0)
     {
       std::cout << "Socket bind failed" << std::endl;
       exit(0);
     }
     else std::cout << "Socket successfully binded" << std::endl;
 
-    if((listen(sockfd, 5)) != 0)
+    if((listen(internal_sockfd, 5)) != 0)
     {
       std::cout << "Server listen failed" << std::endl;
       exit(0);
     }
-    else std::cout << "Server listen" << std::endl;
-    
-    for(;;)
-    {
-      len = sizeof(cli);
-      connfd = accept(sockfd, (SA*)&cli, (socklen_t*)&len);
-      std::cout << connfd << std::endl;
-      if(connfd < 0) std::cout << "Server accept failed" << std::endl;
-      else std::cout << "Server accept the client" << std::endl;
-      bool exit = process(connfd);
-      if(exit){
-        break;
-      }
-      connfd = 0;
-    }
-    
-    close(sockfd);
-    return 0;
+    else std::cout << "Server listen" << std::endl; 
   }
 }
 
-bool server::process(int connfd)
+bool server::process()
 {
   bool exit = false;
   for(;;)
   {
-    bzero(buff, MAX);
-    read(connfd, buff, sizeof(buff));
-    std::string bstr = buff;
-    if(bstr.length() > 1)
+    int len;
+    struct sockaddr_in cli;
+    len = sizeof(cli);
+    connfd = accept(internal_sockfd, (SA*)&cli, (socklen_t*)&len);
+    if(connfd < 0) std::cout << "Server accept failed" << std::endl;
+    for(;;)
     {
-      std::cout << "Message received from client: " << buff << std::endl;
-      if(bstr == "disconnect"){
-        bzero(buff, MAX);
-        exit = true;
+      bzero(buff, MAX);
+      read(connfd, buff, sizeof(buff));
+      std::string bstr = buff;
+      if(bstr.length() > 1)
+      {
+        if(bstr == "disconnect"){
+          bzero(buff, MAX);
+          break;
+        }
+        if(bstr == "exit"){
+          bzero(buff, MAX);
+          exit = true;
+          break;
+        }
+        sd.analyze(bstr);
+        n = 0;
+      }else{
         break;
       }
-      if(bstr == "exit"){
-        bzero(buff, MAX);
-        exit = true;
-        break;
-      }
-      sd.analyze(bstr);
-      n = 0;
-    }else{
+    }
+    if(exit){
       break;
     }
+    connfd = 0;
   }
-  return exit;
+  return 0;
 }
-
 
 #endif

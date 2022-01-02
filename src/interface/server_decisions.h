@@ -1,6 +1,11 @@
 #include<vector>
 #include<cstring>
 #include "../structure/querys.h"
+
+#define MAX 1024
+
+extern int connfd;
+
 class server_decisions
 {
     private:
@@ -8,6 +13,7 @@ class server_decisions
         querys q;
     public:
         void analyze(std::string command);
+        void pst(std::string);
 };
 
 std::vector<std::string> threeSplit(std::string command)
@@ -28,25 +34,45 @@ std::vector<std::string> threeSplit(std::string command)
     return v;
 }
 
+void server_decisions::pst(std::string msg)
+{
+    char buff[MAX];
+    for(std::string::size_type i = 0; i < msg.size(); ++i) {
+        buff[i] = msg[i];
+    }
+    if(connfd < 1)
+    {
+        std::cout << "Socket without connections" << std::endl;
+        return;
+    }
+    write(connfd, buff, sizeof(buff));
+    std::cout <<  "Sended: " << std::endl;
+    std::cout << "----" << connfd << std::endl;
+    std::cout << "----" << buff << std::endl;
+    std::cout << "----" << sizeof(buff) << std::endl;
+    bzero(buff, sizeof(buff));
+    return;
+}
+
 void server_decisions::analyze(std::string command)
 {
     std::vector<std::string> three_v = threeSplit(command + " ");
-    std::cout << three_v[0] << std::endl;
     if(three_v[0] == "put")
     {   
-        q.put(three_v[1], three_v[2]);
+        bool inserted = q.put(three_v[1], three_v[2]);
+        if(inserted) pst("Value inserted");
     }
     else if(three_v[0] == "get")
     {
         std::string value = q.get(three_v[1]);
-        if(value)
-        {
-            std::cout << value << std::endl;
-        }
+        if(value == "NULL_V_SUNNY") pst("Value not found");
+        else pst(value);
     }
     else if(three_v[0] == "remove")
     {
-        q.remove(three_v[1]);
+        bool deleted = q.remove(three_v[1]);
+        if(deleted) pst("Key deleted");
+        else pst("Key not found");
     }
     return;
 }

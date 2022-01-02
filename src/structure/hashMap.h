@@ -14,7 +14,7 @@ class hashMap
       if(v != hmap.end()){
         return v->second;
       }
-      return NULL;
+      return "NULL_V_SUNNY";
     }
     void put(std::string key, std::string value)
     {

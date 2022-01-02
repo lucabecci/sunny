@@ -9,16 +9,18 @@ class querys
   public:
     std::string get(std::string key)
     {
-      return hmap.get(key);
+      std::string v = hmap.get(key);
+      return v;
     }
-    void put(std::string key, std::string value)
+    bool put(std::string key, std::string value)
     {
       hmap.put(key, value);
-      return;
+      return true;
     }
     bool remove(std::string key)
     {
       bool deleted = hmap.remove(key);
-      return deleted;
+      if(deleted) return true;
+      else return false;
     }
 };

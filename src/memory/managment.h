@@ -2,13 +2,15 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
+#define MAX 1024
+
 extern int sockfd;
 class managment
 {
   private:
     std::string first(std::string str);
   public:
-    bool pst(std::string f);
+    void pst(std::string f);
     void validate(std::string command);
 };
 void managment::validate(std::string command)
@@ -30,20 +32,26 @@ void managment::validate(std::string command)
   return;
 }
 
-bool managment::pst(std::string f)
+void managment::pst(std::string f)
 {
-  char buff[f.length()];
+  char buff[MAX];
   for(std::string::size_type i = 0; i < f.size(); ++i) {
     buff[i] = f[i];
   }
   if(sockfd < 1)
   {
     std::cout << "Socket not created" << std::endl;
-    return false;
+    return;
   }
   write(sockfd, buff, sizeof(buff));
   bzero(buff, sizeof(buff));
-  return true;
+  std::cout << "Receiving: " << std::endl;
+  std::cout << "----" << sockfd << std::endl;
+  std::cout << "----" << buff << std::endl;
+  std::cout << "----" << sizeof(buff) << std::endl;
+  read(sockfd, buff, sizeof(buff));
+  std::cout << buff << std::endl;
+  return;
 }
 
 std::string managment::first(std::string str)
