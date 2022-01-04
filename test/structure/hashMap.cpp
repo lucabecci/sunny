@@ -1,5 +1,5 @@
 #include<cstring>
-
+#include<cassert>
 #include "../../src/structure/hashMap.h"
 
 
@@ -11,6 +11,6 @@ int main(int argc, char *argcv[])
   std::string value = hmap.get("2");
   hmap.put("2", "Updated");
   std::string updated = hmap.get("2");
-  std::cout << value << std::endl;
-  std::cout << updated << std::endl;
+  assert(value, "B");
+  assert(updated, "Updated");
 }
