@@ -4,7 +4,7 @@
 enum CASES {
     HELP = 0,
 };
-class decisions
+class client_decisions
 {
     private:
         managment m;
@@ -14,7 +14,7 @@ class decisions
 };
 
 
-void decisions::cmd(std::string command)
+void client_decisions::cmd(std::string command)
 {
     if(command == "help")
     {
@@ -35,7 +35,7 @@ void decisions::cmd(std::string command)
     return;
 }
 
-void decisions::help(void)
+void client_decisions::help(void)
 {
     std::cout << "- memory" << std::endl;
     std::cout << "- dms" << std::endl;

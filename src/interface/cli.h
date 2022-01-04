@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include "../utils/colors.h"
-#include "./decisions.h"
+#include "./client_decisions.h"
 extern bool logs;
 class cli
 {
@@ -11,7 +11,7 @@ class cli
         std::string lowercase(std::string str);
         void name(void);
         colors c;
-        decisions d;
+        client_decisions d;
     public:
         cli(void);
         int run(void);        
