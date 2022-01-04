@@ -1,10 +1,7 @@
 #include <cstring>
 #include "../memory/managment.h"
-
-enum CASES {
-    HELP = 0,
-};
-class client_decisions
+#include "./message_interface.h"
+class client_decisions : private message_interface
 {
     private:
         managment m;
@@ -16,22 +13,24 @@ class client_decisions
 
 void client_decisions::cmd(std::string command)
 {
+    std::string validate_process;
     if(command == "help")
     {
         help();
     }
     else if(command == "exit")
     {
-        m.pst("exit");
+        validate_process = m.pst("exit");
     }
     else if(command == "disconnect")
     {
-        m.pst("disconnect");
+        validate_process = m.pst("disconnect");
     }
     else
     {
-        m.validate(command);
+        validate_process = m.validate(command);
     }
+    __stdoutp(validate_process, "SUCCESS"); 
     return;
 }
 
