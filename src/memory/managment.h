@@ -14,44 +14,42 @@ class managment
     std::string first(std::string str);
     char buff[1024];
   public:
-    void pst(std::string f);
-    void validate(std::string command);
+    std::string pst(std::string f);
+    std::string validate(std::string command);
 };
-void managment::validate(std::string command)
+std::string managment::validate(std::string command)
 {
   std::string initial = first(command);
+  std::string pstcall = "";
   if(initial == "put")
   {
-    pst(command);
+    pstcall = pst(command);
   }
   else if(initial == "remove")
   {
-    pst(command);
+    pstcall = pst(command);
   }
   else if(initial == "get")
   {
-    pst(command);
+    pstcall = pst(command);
   }
-  else std::cout << "Invalid command" << std::endl;
-  return;
+  else pstcall = "Invalid command";
+  return pstcall;
 }
 
-void managment::pst(std::string f)
+std::string managment::pst(std::string f)
 {
   for(std::string::size_type i = 0; i < f.size(); ++i) {
     buff[i] = f[i];
   }
-  if(sockfd < 1)
-  {
-    std::cout << "Socket not created" << std::endl;
-    return;
-  }
+  if(sockfd < 1) return "Socket not created";
   write(sockfd, buff, sizeof(buff));
   bzero(buff, sizeof(buff));
   read(sockfd, buff, sizeof(buff));
-  std::cout << buff << std::endl;
+  std::string message;
+  message = buff;
   bzero(buff, sizeof(buff));
-  return;
+  return message;
 }
 
 std::string managment::first(std::string str)
