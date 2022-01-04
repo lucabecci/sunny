@@ -11,6 +11,8 @@
 #include <cstring>
 #include "../interface/server_decisions.h"
 
+extern int connfd;
+
 #define PORT 8080
 #define MAX 1024
 #define SA struct sockaddr
@@ -25,7 +27,6 @@ class server
   public:
     void connection(void);
     bool process();
-    int connfd;
 };
 
 void server::connection(void)

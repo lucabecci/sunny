@@ -23,7 +23,6 @@ class hashMap
     };
     bool remove(std::string key)
     {
-      if(hmap.find(key) == hmap.end()) return false;
       hmap.erase(key);
       return true;
     };

@@ -1,7 +1,10 @@
 #include<cstring>
 #include <netinet/in.h>
 #include <unistd.h>
-
+#include <netdb.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/socket.h>
 #define MAX 1024
 
 extern int sockfd;
@@ -9,6 +12,7 @@ class managment
 {
   private:
     std::string first(std::string str);
+    char buff[1024];
   public:
     void pst(std::string f);
     void validate(std::string command);
@@ -34,7 +38,6 @@ void managment::validate(std::string command)
 
 void managment::pst(std::string f)
 {
-  char buff[MAX];
   for(std::string::size_type i = 0; i < f.size(); ++i) {
     buff[i] = f[i];
   }
@@ -45,12 +48,9 @@ void managment::pst(std::string f)
   }
   write(sockfd, buff, sizeof(buff));
   bzero(buff, sizeof(buff));
-  std::cout << "Receiving: " << std::endl;
-  std::cout << "----" << sockfd << std::endl;
-  std::cout << "----" << buff << std::endl;
-  std::cout << "----" << sizeof(buff) << std::endl;
   read(sockfd, buff, sizeof(buff));
   std::cout << buff << std::endl;
+  bzero(buff, sizeof(buff));
   return;
 }
 

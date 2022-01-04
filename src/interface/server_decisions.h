@@ -11,6 +11,7 @@ class server_decisions
     private:
         std::vector<std::string> three_split(std::string command);
         querys q;
+        char buff[1024];
     public:
         void analyze(std::string command);
         void pst(std::string);
@@ -18,25 +19,29 @@ class server_decisions
 
 std::vector<std::string> threeSplit(std::string command)
 {
+    int count = 0;
     int loop = 0;
     std::vector<std::string> v;
     std::string word = "";
     for(auto x : command)
     {
-        if(x == ' ' && loop < 3)
+        count++;
+        if(x == ' ' && loop < 2)
         {
             v.push_back(word);  
             word = "";
             loop++;
         }
         else word += x;
+        if(count == command.size()){
+            v.push_back(word);
+        }
     }
     return v;
 }
 
 void server_decisions::pst(std::string msg)
 {
-    char buff[MAX];
     for(std::string::size_type i = 0; i < msg.size(); ++i) {
         buff[i] = msg[i];
     }
@@ -46,10 +51,6 @@ void server_decisions::pst(std::string msg)
         return;
     }
     write(connfd, buff, sizeof(buff));
-    std::cout <<  "Sended: " << std::endl;
-    std::cout << "----" << connfd << std::endl;
-    std::cout << "----" << buff << std::endl;
-    std::cout << "----" << sizeof(buff) << std::endl;
     bzero(buff, sizeof(buff));
     return;
 }
