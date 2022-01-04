@@ -14,23 +14,30 @@ class client_decisions : private message_interface
 void client_decisions::cmd(std::string command)
 {
     std::string validate_process;
+    std::string type;
     if(command == "help")
     {
+        type = "NORMAL"
         help();
     }
     else if(command == "exit")
     {
+        type = "WARNING";
         validate_process = m.pst("exit");
     }
     else if(command == "disconnect")
     {
+        type = "WARNING";
         validate_process = m.pst("disconnect");
     }
     else
     {
+        type = "NORMAL";
         validate_process = m.validate(command);
+        if(validate_process == "Invalid command") type = "ERROR";
+
     }
-    __stdoutp(validate_process, "SUCCESS"); 
+    __stdoutp(validate_process, type); 
     return;
 }
 
