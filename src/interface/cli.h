@@ -48,17 +48,14 @@ int cli::run(void)
     std::cout << c.change(0) << "Sunny => ";
     while (std::cin.get(ch) && ch != '\n')
         str += ch;
-
-    str = lowercase(str);
-    std::string parsed = str;
-    if(parsed == "clear")
+    if(str == "clear")
     {
         system("clear");
         name();
         return 0;
     }
-    d.cmd(parsed);
-    if(parsed == "exit")
+    d.cmd(str);
+    if(str == "exit")
     {
         return 1;
     }
