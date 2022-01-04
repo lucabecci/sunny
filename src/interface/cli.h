@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <cstring>
 #include <iostream>
-#include "../utils/colors.h"
-#include "./decisions.h"
+#include "./client_decisions.h"
+
 extern bool logs;
 class cli
 {
@@ -10,8 +10,7 @@ class cli
         int sock;
         std::string lowercase(std::string str);
         void name(void);
-        colors c;
-        decisions d;
+        client_decisions d;
     public:
         cli(void);
         int run(void);        
@@ -45,20 +44,17 @@ int cli::run(void)
 {
     char ch;
     std::string str = "";
-    std::cout << c.change(0) << "Sunny => ";
+    std::cout << "Sunny => ";
     while (std::cin.get(ch) && ch != '\n')
         str += ch;
-
-    str = lowercase(str);
-    std::string parsed = str;
-    if(parsed == "clear")
+    if(str == "clear")
     {
         system("clear");
         name();
         return 0;
     }
-    d.cmd(parsed);
-    if(parsed == "exit")
+    d.cmd(str);
+    if(str == "exit")
     {
         return 1;
     }
