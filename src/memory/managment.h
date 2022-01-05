@@ -55,15 +55,15 @@ std::string managment::pst(std::string f)
 std::string managment::first(std::string str)
 {
   std::string word = "";
-  for(auto x : str)
+  for(std::string::size_type i = 0; i < str.size(); ++i)
   {
-    if(x == ' ')
+    if(str[i] == ' ')
     {
       break;
     }
     else
     {
-      word += x;
+      word += str[i];
     }
   }
   return word;

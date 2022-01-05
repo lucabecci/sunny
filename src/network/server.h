@@ -23,7 +23,7 @@ class server
     server_decisions sd;
     char buff[MAX];
     int n;
-    int internal_sockfd = 0;
+    int internal_sockfd;
   public:
     void connection(void);
     bool process();

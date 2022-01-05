@@ -7,7 +7,6 @@ class cli
 {
     private:
         int sock;
-        std::string lowercase(std::string str);
         void initial_information(void);
         void name(void);
         client_decisions d;
@@ -19,15 +18,6 @@ cli::cli()
 {
     name();
     initial_information();
-}
-
-std::string cli::lowercase(std::string str)
-{
-    std::for_each(str.begin(), str.end(), [](char & c)
-    {
-        c = ::tolower(c);
-    });
-    return str;
 }
 
 void cli::initial_information(void)

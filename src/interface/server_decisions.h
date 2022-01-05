@@ -23,16 +23,15 @@ std::vector<std::string> threeSplit(std::string command)
     int loop = 0;
     std::vector<std::string> v;
     std::string word = "";
-    for(auto x : command)
-    {
+    for(std::string::size_type i = 0; i < command.size(); ++i) {
         count++;
-        if(x == ' ' && loop < 2)
+        if(command[i] == ' ' && loop < 2)
         {
             v.push_back(word);  
             word = "";
             loop++;
         }
-        else word += x;
+        else word += command[i];
         if(count == command.size()){
             v.push_back(word);
         }
