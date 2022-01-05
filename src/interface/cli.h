@@ -8,6 +8,7 @@ class cli
     private:
         int sock;
         std::string lowercase(std::string str);
+        void initial_information(void);
         void name(void);
         client_decisions d;
     public:
@@ -17,6 +18,7 @@ class cli
 cli::cli()
 {
     name();
+    initial_information();
 }
 
 std::string cli::lowercase(std::string str)
@@ -26,6 +28,11 @@ std::string cli::lowercase(std::string str)
         c = ::tolower(c);
     });
     return str;
+}
+
+void cli::initial_information(void)
+{
+    d.__stdoutp("   FREE AND OPEN SOURCE IN MEMORY DATABASE", "NOT_BOLD_NORMAL");
 }
 
 void cli::name(void)
@@ -50,6 +57,7 @@ int cli::run(void)
     {
         system("clear");
         name();
+        initial_information();
         return 0;
     }
     d.cmd(str);
