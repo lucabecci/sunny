@@ -3,12 +3,12 @@
 #include <iostream>
 #include "./client_decisions.h"
 
-extern bool logs;
 class cli
 {
     private:
         int sock;
         std::string lowercase(std::string str);
+        void initial_information(void);
         void name(void);
         client_decisions d;
     public:
@@ -18,6 +18,7 @@ class cli
 cli::cli()
 {
     name();
+    initial_information();
 }
 
 std::string cli::lowercase(std::string str)
@@ -29,14 +30,19 @@ std::string cli::lowercase(std::string str)
     return str;
 }
 
+void cli::initial_information(void)
+{
+    d.__stdoutp("   FREE AND OPEN SOURCE IN MEMORY DATABASE", "NOT_BOLD_NORMAL");
+}
+
 void cli::name(void)
 {
-    std::cout << " ░██████╗██╗░░░██╗███╗░░██╗███╗░░██╗██╗░░░██╗" << std::endl;
-    std::cout << " ██╔════╝██║░░░██║████╗░██║████╗░██║╚██╗░██╔╝" << std::endl;
-    std::cout << " ╚█████╗░██║░░░██║██╔██╗██║██╔██╗██║░╚████╔╝░" << std::endl;
-    std::cout << " ░╚═══██╗██║░░░██║██║╚████║██║╚████║░░╚██╔╝░░" << std::endl;
-    std::cout << " ██████╔╝╚██████╔╝██║░╚███║██║░╚███║░░░██║░░░" << std::endl;
-    std::cout << " ╚═════╝░░╚═════╝░╚═╝░░╚══╝╚═╝░░╚══╝░░░╚═╝░░░" << std::endl;
+    d.__stdoutp(" ░██████╗██╗░░░██╗███╗░░██╗███╗░░██╗██╗░░░██╗", "ERROR");
+    d.__stdoutp(" ██╔════╝██║░░░██║████╗░██║████╗░██║╚██╗░██╔╝", "WARNING");
+    d.__stdoutp(" ╚█████╗░██║░░░██║██╔██╗██║██╔██╗██║░╚████╔╝░", "SUCCESS");
+    d.__stdoutp(" ░╚═══██╗██║░░░██║██║╚████║██║╚████║░░╚██╔╝░░", "INFO");
+    d.__stdoutp(" ██████╔╝╚██████╔╝██║░╚███║██║░╚███║░░░██║░░░", "MAGENTA");
+    d.__stdoutp(" ╚═════╝░░╚═════╝░╚═╝░░╚══╝╚═╝░░╚══╝░░░╚═╝░░░", "CYAN");
     return;
 }
 
@@ -51,6 +57,7 @@ int cli::run(void)
     {
         system("clear");
         name();
+        initial_information();
         return 0;
     }
     d.cmd(str);

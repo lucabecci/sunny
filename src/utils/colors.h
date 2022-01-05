@@ -45,6 +45,8 @@ std::string colors::change(int type)
             return BLUE;
         case 10:
             return MAGENTA;
+        case 11:
+            return CYAN;
         default:
             return BOLDWHITE;
     }
