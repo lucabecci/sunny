@@ -1,7 +1,7 @@
 #include <cstring>
 #include "../memory/managment.h"
 #include "./message_interface.h"
-class client_decisions : private message_interface
+class client_decisions : public message_interface
 {
     private:
         managment m;
