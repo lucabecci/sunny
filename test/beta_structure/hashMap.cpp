@@ -9,6 +9,6 @@ int main(int argc, char *argv[])
   std::string value;
   dict.put(1, "A");
   dict.get(1, value);
-  std::cout << value << std::endl;
+  assert(value, "A");
   return 0;
 }

@@ -23,16 +23,15 @@ std::vector<std::string> threeSplit(std::string command)
     int loop = 0;
     std::vector<std::string> v;
     std::string word = "";
-    for(auto x : command)
-    {
+    for(std::string::size_type i = 0; i < command.size(); ++i) {
         count++;
-        if(x == ' ' && loop < 2)
+        if(command[i] == ' ' && loop < 2)
         {
             v.push_back(word);  
             word = "";
             loop++;
         }
-        else word += x;
+        else word += command[i];
         if(count == command.size()){
             v.push_back(word);
         }
@@ -60,8 +59,7 @@ void server_decisions::analyze(std::string command)
     std::vector<std::string> three_v = threeSplit(command + " ");
     if(three_v[0] == "put")
     {   
-        bool inserted = q.put(three_v[1], three_v[2]);
-        if(inserted) pst("Value inserted");
+        q.put(three_v[1], three_v[2]);
     }
     else if(three_v[0] == "get")
     {

@@ -1,9 +1,9 @@
 #include "../interface/cli.h"
-#include "../network/singleton_client.h"
+#include "../network/client.h"
 #include "../globals.h"
 int main(int argc, char *argv[]){
     cli c;
-    singleton_client *client = singleton_client::instance();
+    client *client = client::instance();
     client->connection();
     sockfd = client->sockfd;
     for(;;)
