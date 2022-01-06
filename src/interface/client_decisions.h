@@ -26,18 +26,19 @@ void client_decisions::cmd(std::string command)
     else if(command == "exit")
     {
         type = "WARNING";
-        validate_process = m.pst("exit");
+        validate_process = m.pst("exit", true);
     }
     else if(command == "disconnect")
     {
         type = "WARNING";
-        validate_process = m.pst("disconnect");
+        validate_process = m.pst("disconnect", true);
     }
     else
     {
         type = "NORMAL";
         validate_process = m.validate(command);
         if(validate_process == "Invalid command") type = "ERROR";
+        else if(validate_process == "") return;
 
     }
     __stdoutp(validate_process, type); 

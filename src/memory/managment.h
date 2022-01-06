@@ -14,7 +14,7 @@ class managment
     std::string first(std::string str);
     char buff[1024];
   public:
-    std::string pst(std::string f);
+    std::string pst(std::string f, bool capture);
     std::string validate(std::string command);
 };
 std::string managment::validate(std::string command)
@@ -23,21 +23,21 @@ std::string managment::validate(std::string command)
   std::string pstcall = "";
   if(initial == "put")
   {
-    pstcall = pst(command);
+    pstcall = pst(command, false);
   }
   else if(initial == "remove")
   {
-    pstcall = pst(command);
+    pstcall = pst(command, true);
   }
   else if(initial == "get")
   {
-    pstcall = pst(command);
+    pstcall = pst(command, true);
   }
   else pstcall = "Invalid command";
   return pstcall;
 }
 
-std::string managment::pst(std::string f)
+std::string managment::pst(std::string f, bool capture)
 {
   for(std::string::size_type i = 0; i < f.size(); ++i) {
     buff[i] = f[i];
@@ -45,11 +45,18 @@ std::string managment::pst(std::string f)
   if(sockfd < 1) return "Socket not created";
   write(sockfd, buff, sizeof(buff));
   bzero(buff, sizeof(buff));
-  read(sockfd, buff, sizeof(buff));
-  std::string message;
-  message = buff;
-  bzero(buff, sizeof(buff));
-  return message;
+  if(capture)
+  {
+    read(sockfd, buff, sizeof(buff));
+    std::string message;
+    message = buff;
+    bzero(buff, sizeof(buff));
+    return message;
+  }else
+  {
+    bzero(buff, sizeof(buff));
+    return "";
+  }
 }
 
 std::string managment::first(std::string str)
