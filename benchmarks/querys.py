@@ -13,21 +13,21 @@ def bench():
     arr = []
     print("Bench started")
     connection()
-    for x in range(500000):
+    for x in range(20):
         v = str(uuid.uuid4())
         arr.append(v)
-        t = str(random.random())
+        t = str(100 + ( random.randint(2323123123213,3333213123123123123) * (230000 - 100))) 
         query_put = 'put ' + v + " " + t
         print("Inserted " + query_put)
         sock.send(query_put.encode("utf-8"))
         time.sleep(0.02)
     
-    index = random.choice(arr)
+    index = str(arr[round((len(arr) - 1) / 2)])
     query = "get " + index
     start_time = time.time()
     sock.send(query.encode())
     data = sock.recv(1024)
-    print("VALUE: " + data.decode())
+    print("KEY: " + index + "\\//" + "VALUE: " + data.decode())
     print("TIME TO FIND THE KEY IN THE DB")
     print("--- %s seconds ---" % (time.time() - start_time))
 
