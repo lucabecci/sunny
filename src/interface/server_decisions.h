@@ -59,8 +59,7 @@ void server_decisions::analyze(std::string command)
     std::vector<std::string> three_v = threeSplit(command + " ");
     if(three_v[0] == "put")
     {   
-        bool inserted = q.put(three_v[1], three_v[2]);
-        if(inserted) pst("Value inserted");
+        q.put(three_v[1], three_v[2]);
     }
     else if(three_v[0] == "get")
     {
