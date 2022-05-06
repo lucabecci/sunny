@@ -25,10 +25,6 @@ std::string managment::validate(std::string command)
   {
     pstcall = pst(command, false);
   }
-  else if(initial == "remove")
-  {
-    pstcall = pst(command, true);
-  }
   else if(initial == "get")
   {
     pstcall = pst(command, true);

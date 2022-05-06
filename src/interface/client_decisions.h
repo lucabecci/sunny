@@ -60,7 +60,6 @@ void client_decisions::database_help(void)
     __stdoutp("- DATABASE", "INFO");
     __stdoutp(" - put key value - This command will add up or update one key in the database", "NOT_BOLD_NORMAL");
     __stdoutp(" - get key - This command will find a key in the database", "NOT_BOLD_NORMAL");
-    __stdoutp(" - remove key - This command will remove a key of the database", "NOT_BOLD_NORMAL");
 }
 
 void client_decisions::dms_help(void)
