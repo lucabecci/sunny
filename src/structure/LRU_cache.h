@@ -1,16 +1,16 @@
-#pragma once
-
 #include <list>
 #include <unordered_map>
 #include <cstring>
 #include <assert.h>
 
-template <class KEY_T, class VAL_T> class LRU_cache 
+template <class KEY_T, class VAL_T> 
+
+class LRU_cache 
 {
     private:
-        std::list<std::pair<KEY_T, VAL_T>>item_list;
+        std::list< std::pair<KEY_T, VAL_T> > item_list;
         std::unordered_map<KEY_T, decltype(item_list.begin())> item_map;
-        size_t cache_size;
+        size_t cache_size = 1024;
 
     private:
         void clean(void)
@@ -24,7 +24,6 @@ template <class KEY_T, class VAL_T> class LRU_cache
         };
 
     public:
-        LRU_cache(int cache_size):cache_size(cache_size_){;}
         void put(const KEY_T &key, const VAL_T &val)
         {
             auto it = item_map.find(key);
@@ -34,22 +33,23 @@ template <class KEY_T, class VAL_T> class LRU_cache
                 item_map.erase(it);
             }
             item_list.push_front(std::make_pair(key, val));
-            item_map.insert(std::make_pair(key, item_list.begin()))
-            clean()
+            item_map.insert(std::make_pair(key, item_list.begin()));
+            clean();
         }
         bool exists(const KEY_T &key)
         {
-            return (item_map.count(key) > 0)
+            return (item_map.count(key) > 0);
         }
         VAL_T get(const KEY_T &key)
         {
-            assert(exists(key));
+            if(!exists(key))
+            {
+                return "NULL_V_SUNNY";
+            }
             auto it = item_map.find(key);
             item_list.splice(item_list.begin(), item_list, it->second);
             return it->second->second;
         }
-
-
 };
 
 
