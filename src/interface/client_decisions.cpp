@@ -1,18 +1,7 @@
 #include <cstring>
-#include "../memory/managment.h"
-#include "./message_interface.h"
-class client_decisions : public message_interface
-{
-    private:
-        managment m;
-        void help(void);
-        void database_help(void);
-        void dms_help(void);
-        void creator_help(void);
-    public:
-        void cmd(std::string command);
-};
-
+#include "../memory/managment.cpp"
+#include "./message_interface.cpp"
+#include "../../includes/interface/client_decisions.hpp"
 
 void client_decisions::cmd(std::string command)
 {

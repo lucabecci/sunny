@@ -1,22 +1,10 @@
 #include <memory>
 #include<thread>
 #include<mutex>
-#include<condition_variable>
-#include "./client.h"
-#include "./server.h"
-
-std::mutex mtx;
-std::condition_variable cv;
-
-class sides
-{
-    private: 
-        void thread_client(void);
-        void thread_server(void);
-    public: 
-        int process(void);
-};
-
+#include <condition_variable>
+#include "./client.cpp"
+#include "./erver.cpp"
+#include "../../includes/network/sides.hpp"
 
 void sides::thread_client(void)
 {

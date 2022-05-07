@@ -1,19 +1,9 @@
 #include <algorithm>
 #include <cstring>
 #include <iostream>
-#include "./client_decisions.h"
+#include "./client_decisions.cpp"
+#include "../../includes/interface/cli.hpp"
 
-class cli
-{
-    private:
-        int sock;
-        void initial_information(void);
-        void name(void);
-        client_decisions d;
-    public:
-        cli(void);
-        int run(void);        
-};
 cli::cli()
 {
     name();

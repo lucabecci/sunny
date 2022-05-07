@@ -1,13 +1,6 @@
 #include<cstring>
-#include "../utils/colors.h"
-class message_interface
-{
-    private:
-        colors colors_process;
-    public:
-        void stdout(std::string message, std::string type);
-};
-
+#include "../utils/colors.cpp"
+#include "../../includes/interface/message_interface.hpp"
 
 void message_interface::stdout(std::string message, std::string type)
 {

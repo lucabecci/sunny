@@ -1,21 +1,8 @@
 #include<vector>
 #include<cstring>
-#include "../structure/querys.h"
+#include "../../includes/interface/server_decisions.hpp"
+#include "../structure/querys.cpp"
 
-#define MAX 1024
-
-extern int connfd;
-
-class server_decisions
-{
-    private:
-        std::vector<std::string> three_split(std::string command);
-        querys q;
-        char buff[1024];
-    public:
-        void analyze(std::string command);
-        void pst(std::string);
-};
 
 std::vector<std::string> threeSplit(std::string command)
 {
@@ -67,11 +54,11 @@ void server_decisions::analyze(std::string command)
         if(value == "NULL_V_SUNNY") pst("Value not found");
         else pst(value);
     }
-    else if(three_v[0] == "remove")
-    {
-        bool deleted = q.remove(three_v[1]);
-        if(deleted) pst("Key deleted");
-        else pst("Key not found");
-    }
+    // else if(three_v[0] == "remove")
+    // {
+    //     bool deleted = q.remove(three_v[1]);
+    //     if(deleted) pst("Key deleted");
+    //     else pst("Key not found");
+    // }
     return;
 }

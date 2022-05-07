@@ -1,6 +1,6 @@
 #include<iostream>
-#include "../network/server.h"
-#include "../globals.h"
+#include "../src/network/server.cpp"
+#include "../src/globals.h"
 
 int main(int argc, char *argv[]){
     server s;
