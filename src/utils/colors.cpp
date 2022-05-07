@@ -1,4 +1,6 @@
 #include <cstring>
+#include "../../includes/utils/colors.hpp"
+
 #define WHITE   "\033[0m"       /* White */
 #define BLACK   "\033[30m"      /* Black */
 #define RED     "\033[31m"      /* Red */
@@ -12,12 +14,6 @@
 #define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
 #define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
-
-class colors
-{
-    public:
-        std::string change(int type);
-};
 
 std::string colors::change(int type)
 {

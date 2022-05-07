@@ -1,5 +1,6 @@
-#include <random>
-#include <sstream>
+#ifndef UID_H
+#define UID_H
+
 
 class uid
 {   
@@ -14,13 +15,4 @@ class uid
 };
 
 
-std::string uid::generate(void)
-{
-    std::string r;
-    for (int i = 0; i < 16; i++) {
-        if (dash[i]) r += "-";
-        r += v[dist(rng)];
-        r += v[dist(rng)];
-    }
-    return r;
-}
+#endif
