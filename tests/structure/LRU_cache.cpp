@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN 
 
 #include "catch.hpp"
-#include "../../src/structure/LRU_cache.h"
+#include "../../src/structure/LRU_cache.hpp"
 
 LRU_cache< std::string, std::string > lru;
 
