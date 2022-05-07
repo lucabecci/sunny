@@ -1,7 +1,8 @@
+#ifndef LRU_CACHE_H
+#define LRU_CACHE_H
 #include <list>
 #include <unordered_map>
 #include <cstring>
-#include <assert.h>
 
 template <class KEY_T, class VAL_T> 
 
@@ -15,7 +16,7 @@ class LRU_cache
     private:
         void clean(void)
         {
-            while(item_map.size() > cache_size)
+        while(item_map.size() > cache_size)
             {
                 auto last_it = item_list.end(); last_it --;
                 item_map.erase(last_it->first);
@@ -52,4 +53,4 @@ class LRU_cache
         }
 };
 
-
+#endif
