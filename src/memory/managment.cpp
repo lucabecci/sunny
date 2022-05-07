@@ -5,18 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
-#define MAX 1024
+#include "../../includes/memory/managment.hpp"
 
-extern int sockfd;
-class managment
-{
-  private:
-    std::string first(std::string str);
-    char buff[1024];
-  public:
-    std::string pst(std::string f, bool capture);
-    std::string validate(std::string command);
-};
 std::string managment::validate(std::string command)
 {
   std::string initial = first(command);
