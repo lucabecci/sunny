@@ -1,26 +1,19 @@
 #include<cstring>
-#include "./hashMap.h"
-
+#include "./LRU_cache.h"
 
 class querys 
 {
   private:
-    hashMap hmap;
+    LRU_cache<std::string, std::string> lru;
   public:
     std::string get(std::string key)
     {
-      std::string v = hmap.get(key);
+      std::string v = lru.get(key);
       return v;
     }
     bool put(std::string key, std::string value)
     {
-      hmap.put(key, value);
+      lru.put(key, value);
       return true;
-    }
-    bool remove(std::string key)
-    {
-      bool deleted = hmap.remove(key);
-      if(deleted) return true;
-      else return false;
     }
 };
