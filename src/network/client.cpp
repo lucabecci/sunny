@@ -5,23 +5,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-
-#define PORT 8080
-#define SA struct sockaddr
-
-class client
-{
-  private:    
-    client(){};
-    client(client const&) {};
-    client& operator=(client const&) {return *this;};
-    static client * instance_;
-  public:
-    int sockfd;
-    static client * instance();
-    void connection(void);
-    bool pst(std::string c);
-};
+#include "../../includes/network/client.hpp"
 
 client* client::instance_ = NULL;
 
