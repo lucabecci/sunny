@@ -1,6 +1,8 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#include "../interface/server_decisions.hpp"
+
 extern int connfd;
 
 #define PORT 8080

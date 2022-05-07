@@ -1,5 +1,6 @@
 #define MAX 1024
 
+#include "../structure/querys.hpp"
 
 
 extern int connfd;

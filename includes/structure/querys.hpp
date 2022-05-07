@@ -2,6 +2,8 @@
 #define QUERYS_H
 
 
+#include "../../src/structure/LRU_cache.hpp"
+
 class querys 
 {
   private:
