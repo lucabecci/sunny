@@ -17,7 +17,6 @@ client* client::instance()
 
 void client::connection(void)
 {
-  int connfd;
   struct sockaddr_in servaddr;
   
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
