@@ -56,17 +56,17 @@ bool server::process()
     if(connfd < 0) std::cout << "Server accept failed" << std::endl;
     for(;;)
     {
-      bzero(buff, MAX);
+      bzero(buff, MAX_SV);
       read(connfd, buff, sizeof(buff));
       std::string bstr = buff;
       if(bstr.length() > 1)
       {
         if(bstr == "disconnect"){
-          bzero(buff, MAX);
+          bzero(buff, MAX_SV);
           break;
         }
         if(bstr == "exit"){
-          bzero(buff, MAX);
+          bzero(buff, MAX_SV);
           exit = true;
           break;
         }
