@@ -6,14 +6,14 @@
 extern int connfd;
 
 #define PORT 8080
-#define MAX 1024
+#define MAX_SV 1024
 #define SA struct sockaddr
 
 class server
 {
   private:
     server_decisions sd;
-    char buff[MAX];
+    char buff[MAX_SV];
     int n;
     int internal_sockfd;
   public:

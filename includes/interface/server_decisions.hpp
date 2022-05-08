@@ -1,4 +1,4 @@
-#define MAX 1024
+#define MAX_SVD 1024
 
 #include "../structure/querys.hpp"
 
@@ -14,7 +14,7 @@ class server_decisions
     private:
         std::vector<std::string> three_split(std::string command);
         querys q;
-        char buff[MAX];
+        char buff[MAX_SVD];
     public:
         void analyze(std::string command);
         void pst(std::string);

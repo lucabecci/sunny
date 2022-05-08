@@ -54,11 +54,5 @@ void server_decisions::analyze(std::string command)
         if(value == "NULL_V_SUNNY") pst("Value not found");
         else pst(value);
     }
-    // else if(three_v[0] == "remove")
-    // {
-    //     bool deleted = q.remove(three_v[1]);
-    //     if(deleted) pst("Key deleted");
-    //     else pst("Key not found");
-    // }
     return;
 }
