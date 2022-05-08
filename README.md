@@ -8,22 +8,38 @@
   <img width="700" align="center" src="https://s10.gifyu.com/images/Grabacion-de-pantalla-2022-01-06-a-la_s_-01.57.30.gif" alt="demo"/>
 </p>
 
+## ❗ Important
+Sunny takes care of removing the least used keys in the database in order to get a quick response at all times.
 ## 🔧 Installation 
 
 Make sure you have [g++](https://www.mingw-w64.org/) for this project.
 
+### Manual compilation
 Just run the following command at the root of your project to compile the code:
 
 For the Sunny CLI:
 
 ```bash
-g++ ./src/runtime/client_runtime.cpp -o client && ./client.out 
+g++ ./runtime/client_runtime.cpp -o client && ./client.out 
 ```
 
 For the Sunny server:
 
 ```bash
-g++ ./src/runtime/server_runtime.cpp -o server && ./server.out 
+g++ ./runtime/server_runtime.cpp -o server && ./server.out 
+```
+### Makefile
+You can create the binaries through a makefile and then run them through the console, they will be in the "bin" folder:
+```bash
+make
+```
+After this you could run the client or the server by:
+```bash
+##the client
+./bin/client
+
+##the server
+./bin/server
 ```
 
 ## 🚀 Usage
@@ -32,7 +48,7 @@ You can see the manual in the CLI  with the `help` command.
 Principal commands:
 - <span style="color:cyan">put</span> key value - This command will add up or update one key in the database.
 - <span style="color:cyan">get</span> key - This command will find a key in the database.
-- <span style="color:cyan">remove</span> key - This command will remove a key of the database.
+
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome.<br />
